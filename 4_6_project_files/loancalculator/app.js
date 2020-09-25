@@ -1,10 +1,10 @@
 // Listen for submit
-document.getElementById('loan-form').addEventListener('submit', function(e){
+document.getElementById("loan-form").addEventListener("submit", function (e) {
   // Hide results
-  document.getElementById('results').style.display = 'none';
-  
+  document.getElementById("results").style.display = "none";
+
   // Show loader
-  document.getElementById('loading').style.display = 'block';
+  document.getElementById("loading").style.display = "block";
 
   setTimeout(calculateResults, 2000);
 
@@ -12,15 +12,15 @@ document.getElementById('loan-form').addEventListener('submit', function(e){
 });
 
 // Calculate Results
-function calculateResults(){
-  console.log('Calculating...');
+function calculateResults() {
+  console.log("Calculating...");
   // UI Vars
-  const amount = document.getElementById('amount');
-  const interest = document.getElementById('interest');
-  const years = document.getElementById('years');
-  const monthlyPayment = document.getElementById('monthly-payment');
-  const totalPayment = document.getElementById('total-payment');
-  const totalInterest = document.getElementById('total-interest');
+  const amount = document.getElementById("amount");
+  const interest = document.getElementById("interest");
+  const years = document.getElementById("years");
+  const monthlyPayment = document.getElementById("monthly-payment");
+  const totalPayment = document.getElementById("total-payment");
+  const totalInterest = document.getElementById("total-interest");
 
   const principal = parseFloat(amount.value);
   const calculatedInterest = parseFloat(interest.value) / 100 / 12;
@@ -28,41 +28,41 @@ function calculateResults(){
 
   // Compute monthly payment
   const x = Math.pow(1 + calculatedInterest, calculatedPayments);
-  const monthly = (principal*x*calculatedInterest)/(x-1);
+  const monthly = (principal * x * calculatedInterest) / (x - 1);
 
-  if(isFinite(monthly)) {
+  if (isFinite(monthly)) {
     monthlyPayment.value = monthly.toFixed(2);
     totalPayment.value = (monthly * calculatedPayments).toFixed(2);
-    totalInterest.value = ((monthly * calculatedPayments)-principal).toFixed(2);
+    totalInterest.value = (monthly * calculatedPayments - principal).toFixed(2);
 
     // Show results
-    document.getElementById('results').style.display = 'block';
+    document.getElementById("results").style.display = "block";
 
     // Hide loader
-    document.getElementById('loading').style.display = 'none';
-
+    document.getElementById("loading").style.display = "none";
   } else {
-    showError('Please check your numbers');
+    showError("Please check your numbers");
   }
+
 }
 
 // Show Error
-function showError(error){
+function showError(error) {
   // Hide results
-  document.getElementById('results').style.display = 'none';
-  
+  document.getElementById("results").style.display = "none";
+
   // Hide loader
-  document.getElementById('loading').style.display = 'none';
+  document.getElementById("loading").style.display = "none";
 
   // Create a div
-  const errorDiv = document.createElement('div');
+  const errorDiv = document.createElement("div");
 
   // Get elements
-  const card = document.querySelector('.card');
-  const heading = document.querySelector('.heading');
+  const card = document.querySelector(".card");
+  const heading = document.querySelector(".heading");
 
   // Add class
-  errorDiv.className = 'alert alert-danger';
+  errorDiv.className = "alert alert-danger";
 
   // Create text node and append to div
   errorDiv.appendChild(document.createTextNode(error));
@@ -75,6 +75,6 @@ function showError(error){
 }
 
 // Clear error
-function clearError(){
-  document.querySelector('.alert').remove();
+function clearError() {
+  document.querySelector(".alert").remove();
 }
